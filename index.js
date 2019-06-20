@@ -12,6 +12,18 @@ app.get('/', (req, res) => {
     res.sendFile(`${__dirname}/index.html`);
 });
 
+io.on('connection', (socket) => {
+    socket.on('join', (name) => {
+        userService.addUser({
+            id: socket.id,
+            name
+        });
+        io.emit('update', {
+            users: userService.getAllUsers()
+        });
+    });
+});
+
 server.listen(3000, () => {
     console.log('listening on *:3000');
 });
