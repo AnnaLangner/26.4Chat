@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
             name
         });
         io.emit('update', {
-            users: usersServicee.getAllUsers()
+            users: usersService.getAllUsers()
         });
     });
 });
